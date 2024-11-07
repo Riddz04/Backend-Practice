@@ -1,0 +1,80 @@
+function ki bhi length hoti hai which is equal to the number of parameters
+//async js
+line by line code is synchronous and jb asynchronous code aata hai to usse sidestack mein bhejdete hai and main stack mein sync waali complete krte hai.
+jb saara syn khatam hojaye then check kiya jaata hai ki async waala process hua ya nhi and agr hogya hota hai to usse mainstack mein laakr chladete hai
+eg. fetch is async code and await is async
+//database dusre continent mein hota hai
+//API- Application programming interface
+
+file structure:
+src-index(database connects), app(config,cookies), constants
+database 
+models
+controllers(methods,functionalities)
+routes
+middlewares
+utils
+more(depends)
+
+//types of js
+there are 2 types of js accessing -1.module and 2.common js
+import waali line se jo shuru hoti hai those are modules and to access them we have to write type = module in the package.json file
+and common.js waali we can access without mentioning any type 
+
+We use AXIOS in frontend to access from backend because isse hume alg se data parse krne ki zrurat nhi padti
+
+CORS is a way of protection in servers jisse frontend ki req mein sirf unhi ko allow hota hai jinka origin same ho and by that it means ki agr backend and frontend ke localhost ke ports bhi diff hai then by cors policy it wont allow and will generate an error.
+
+Proxy are a way of adding the common url as a proxy and so that u dont have to write complete url everytime and just write the after part. There are diff ways in diff frameworks. for eg in vite ->vite.config.js->add server config and in that u can add proxy along with port and other things.
+
+MODELS
+MONGOOSE: for data storage
+3 steps
+-> import mongoose from "mongoose"
+-> const userSchema = new mongoose.Schema({
+    username : String,
+    email : String,
+    isActive : boolean
+}) // this is for storing an object
+-> export const User = mongoose.model("User",userSchema)  // model is a method which takes 2 parameters that is kya model bnau and kispe base pe model bnau (jo "User" naam diya hai wo database mein as users store hota hai mtlb lowercase mein hojata and plural)
+
+int the second step we can also store in schema like:
+this way of storing access the superpower of mongoose
+-> const userSchema = new mongoose.Schema({
+    username:{
+        type : String,
+        required: true, //this makes sure that ye data feed hona hi chahiye iske bina baaki ka data store nhi hoga
+        unique : true //like in instagram the username should be unique
+    },
+    email:{
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true
+    },
+    password:{
+        type:String,
+        required:[true,"password is required"]  // this way we can send custom messages too
+    }
+},{timestamps: true}
+)
+//timestamps contain createdAt and updatedAt 
+
+it can also be defined as:
+-> const subTodoSchema = new mongoose.Schema({
+    content:{
+        type:String,
+        required : true
+    },
+    complete:{
+        type: Boolean,
+        default: false
+    },
+    createdBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "User"
+    }
+},{timestamps:true}
+)
+
+IN middlewares WE USE //app.use()// to set the config
